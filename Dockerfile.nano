@@ -1,6 +1,7 @@
 FROM openjdk:8-jre
 ARG DRUID_VERSION=0.19.0
 ARG DRUID_COORDINATOR_CONF_FILE=apache-druid-${DRUID_VERSION}/conf/druid/single-server/nano-quickstart/coordinator-overlord/runtime.properties
+ARG DRUID_COMMON_CONF_FILE=apache-druid-${DRUID_VERSION}/conf/druid/single-server/nano-quickstart/_common/common.runtime.properties
 
 RUN wget http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUID_VERSION}-bin.tar.gz \
     && tar -xzf apache-druid-${DRUID_VERSION}-bin.tar.gz \
@@ -10,7 +11,10 @@ RUN wget http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUI
     && rm -rf /var/lib/apt/lists/* \
     && echo druid.manager.segments.pollDuration=PT5S >> ${DRUID_COORDINATOR_CONF_FILE} \
     && echo druid.manager.config.pollDuration=PT5S >> ${DRUID_COORDINATOR_CONF_FILE} \
-    && echo druid.manager.rules.pollDuration=PT5S >> ${DRUID_COORDINATOR_CONF_FILE}
+    && echo druid.manager.rules.pollDuration=PT5S >> ${DRUID_COORDINATOR_CONF_FILE} \
+    # Add the postgresql-metadata-storage extension, we don't want to add/maintain config files in this repo
+    # looking for a cleaner solution, env var?
+    && sed -i -e 's/^druid.extensions.loadList=.*/druid.extensions.loadList=["druid-hdfs-storage", "druid-kafka-indexing-service", "druid-datasketches", "postgresql-metadata-storage"]/g' ${DRUID_COMMON_CONF_FILE}
 
 ENV DRUID_VERSION=$DRUID_VERSION
 
