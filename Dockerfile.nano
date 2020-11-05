@@ -17,7 +17,7 @@ RUN wget http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUI
     && sed -i 's/^druid.extensions.loadList=.*/druid.extensions.loadList=["druid-hdfs-storage", "druid-kafka-indexing-service", "druid-datasketches", "postgresql-metadata-storage"]/g' ${DRUID_COMMON_CONF_FILE} \
     # Set a tier for the historical(s)
     && sed -i "/^druid.server.tier=/d" ${DRUID_HISTORICAL_CONF_FILE} \
-    && echo -e "\n# Historical(s) tier" >> ${DRUID_HISTORICAL_CONF_FILE} \
+    && printf "\n# Historical(s) tier" >> ${DRUID_HISTORICAL_CONF_FILE} \
     && echo "druid.server.tier=_internally_data_node" >> ${DRUID_HISTORICAL_CONF_FILE}
 
 ENV DRUID_VERSION=$DRUID_VERSION
