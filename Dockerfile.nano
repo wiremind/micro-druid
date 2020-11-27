@@ -14,7 +14,7 @@ RUN wget http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUI
     && echo druid.manager.rules.pollDuration=PT5S >> ${DRUID_COORDINATOR_CONF_FILE} \
     # Add the postgresql-metadata-storage extension, we don't want to add/maintain config files in this repo
     # looking for a cleaner solution, env var?
-    && sed -i -e 's/^druid.extensions.loadList=.*/druid.extensions.loadList=["druid-hdfs-storage", "druid-kafka-indexing-service", "druid-datasketches", "postgresql-metadata-storage"]/g' ${DRUID_COMMON_CONF_FILE}
+    && sed -i -e 's/^druid.extensions.loadList=.*/druid.extensions.loadList=["druid-hdfs-storage", "druid-kafka-indexing-service", "druid-datasketches", "postgresql-metadata-storage", "druid-s3-extensions"]/g' ${DRUID_COMMON_CONF_FILE}
 
 ENV DRUID_VERSION=$DRUID_VERSION
 
