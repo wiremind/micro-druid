@@ -1,5 +1,5 @@
 FROM openjdk:8-jre
-ARG DRUID_VERSION=0.19.0
+ARG DRUID_VERSION=0.20.1
 
 RUN wget http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUID_VERSION}-bin.tar.gz \
     && tar -xzf apache-druid-${DRUID_VERSION}-bin.tar.gz \
