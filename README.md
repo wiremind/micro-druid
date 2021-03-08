@@ -7,8 +7,7 @@ Arguments
 ---------
 
 Arguments that can be set while building:
-- `DRUID_VERSION`: 0.19.0 by default
-- `DRUID_COORDINATOR_CONF_FILE`: path to the runtime.properties of the coordinator service. 
+- `DRUID_VERSION`: 0.20.1 by default
 
 Building
 --------
