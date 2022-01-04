@@ -7,13 +7,22 @@ Arguments
 ---------
 
 Arguments that can be set while building:
-- `DRUID_VERSION`: 0.20.1 by default
+- `DRUID_VERSION`: You can also change the default value in the Dockerfiles.
 
 Building
 --------
 
-Every time a `^[0-9.]+` tag is pushed, two docker images `micro-{tag}` and `micro-{tag}` are built and published [here](https://hub.docker.com/repository/docker/wiremind/mino-druid).
+```
+DRUID_VERSION=XXX # 0.22.1 for example.
 
+# For the micro image
+docker build -t wiremind/mino-druid:micro-${DRUID_VERSION} --build-arg DRUID_VERSION=${DRUID_VERSION} -f ./Dockerfile .
+docker push  wiremind/mino-druid:micro-${DRUID_VERSION}
+
+# For the nano image
+docker build -t wiremind/mino-druid:nano-${DRUID_VERSION} --build-arg DRUID_VERSION=${DRUID_VERSION} -f ./Dockerfile.nano .
+docker push  wiremind/mino-druid:nano-${DRUID_VERSION}
+```
 
 Required hardware
 ------------------
