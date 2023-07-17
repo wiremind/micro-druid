@@ -4,7 +4,7 @@ name: Create and publish a Container image
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
     branches:
       - master
       - docker
