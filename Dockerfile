@@ -1,5 +1,5 @@
-FROM openjdk:8-jre
-ARG DRUID_VERSION=0.22.1
+FROM openjdk:8-jre AS builder
+ARG DRUID_VERSION=24.0.2
 
 RUN wget http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUID_VERSION}-bin.tar.gz \
     && tar -xzf apache-druid-${DRUID_VERSION}-bin.tar.gz \
@@ -13,5 +13,10 @@ COPY conf/ /apache-druid-${DRUID_VERSION}/conf
 
 ENV DRUID_VERSION=$DRUID_VERSION
 
+FROM builder as druid-micro
+
 ENTRYPOINT apache-druid-${DRUID_VERSION}/bin/start-micro-quickstart
 
+FROM builder as druid-nano
+
+ENTRYPOINT apache-druid-${DRUID_VERSION}/bin/start-nano-quickstart
