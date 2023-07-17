@@ -31,7 +31,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata (tags, labels) for Docker (micro)
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
@@ -46,11 +46,19 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}-micro
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Extract metadata (tags, labels) for Docker (nano)
+        id: meta-nano
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          flavor: |
+            suffix=-nano
+
       - name: Build and push Docker image (nano)
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           push: true
           file: Dockerfile
           target: druid-nano
-          tags: ${{ steps.meta.outputs.tags }}-nano
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta-nano.outputs.tags }}
+          labels: ${{ steps.meta-nano.outputs.labels }}
