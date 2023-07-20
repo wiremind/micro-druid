@@ -1,5 +1,5 @@
 FROM openjdk:8-jre AS builder
-ARG DRUID_VERSION=24.0.2
+ARG DRUID_VERSION=26.0.0
 
 RUN wget http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUID_VERSION}-bin.tar.gz \
     && tar -xzf apache-druid-${DRUID_VERSION}-bin.tar.gz \
