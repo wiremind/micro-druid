@@ -42,6 +42,7 @@ jobs:
         with:
           push: true
           file: Dockerfile
+          no-cache: true
           target: druid-micro
           tags: ${{ steps.meta.outputs.tags }}-micro
           labels: ${{ steps.meta.outputs.labels }}
@@ -58,6 +59,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           push: true
+          no-cache: true
           file: Dockerfile
           target: druid-nano
           tags: ${{ steps.meta-nano.outputs.tags }}
