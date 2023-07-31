@@ -42,6 +42,7 @@ jobs:
         with:
           push: true
           file: Dockerfile
+          no-cache: true
           target: druid-micro
           tags: ${{ steps.meta.outputs.tags }}-micro
           labels: ${{ steps.meta.outputs.labels }}
@@ -59,6 +60,7 @@ jobs:
         with:
           push: true
           file: Dockerfile
+          no-cache: true
           target: druid-nano
           tags: ${{ steps.meta-nano.outputs.tags }}
           labels: ${{ steps.meta-nano.outputs.labels }}
