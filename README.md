@@ -7,21 +7,19 @@ Arguments
 ---------
 
 Arguments that can be set while building:
-- `DRUID_VERSION`: You can also change the default value in the Dockerfiles.
+- `DRUID_VERSION`: You can also change the default value in the Containerfile.
 
 Building
 --------
 
 ```
-DRUID_VERSION=XXX # 0.22.1 for example.
+export DRUID_VERSION=XXX # 26.0.0 for example.
 
 # For the micro image
-docker build -t wiremind/mino-druid:micro-${DRUID_VERSION} --build-arg DRUID_VERSION=${DRUID_VERSION} -f ./Dockerfile .
-docker push  wiremind/mino-druid:micro-${DRUID_VERSION}
+docker build -t micro-druid:${DRUID_VERSION}-micro --build-arg DRUID_VERSION=${DRUID_VERSION} -f ./Containerfile --target druid-micro .
 
 # For the nano image
-docker build -t wiremind/mino-druid:nano-${DRUID_VERSION} --build-arg DRUID_VERSION=${DRUID_VERSION} -f ./Dockerfile.nano .
-docker push  wiremind/mino-druid:nano-${DRUID_VERSION}
+docker build -t micro-druid:${DRUID_VERSION}-nano --build-arg DRUID_VERSION=${DRUID_VERSION} -f ./Containerfile --target druid-nano .
 ```
 
 Required hardware
