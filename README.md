@@ -1,16 +1,13 @@
-Micro & Nano druid, for E2E tests
-=======================================
+# Micro & Nano druid, for E2E tests
 
 Dockerfiles to run nano and micro setups of [druid](https://github.com/apache/druid) for e2e tests. Some configurations are applied to maximize the response time of the Druid docker but should in no way refer to a production cluster.
 
-Arguments
----------
+## Arguments
 
 Arguments that can be set while building:
 - `DRUID_VERSION`: You can also change the default value in the Containerfile.
 
-Building
---------
+## Building
 
 ```
 export DRUID_VERSION=XXX # 26.0.0 for example.
@@ -22,22 +19,14 @@ docker build -t micro-druid:${DRUID_VERSION}-micro --build-arg DRUID_VERSION=${D
 docker build -t micro-druid:${DRUID_VERSION}-nano --build-arg DRUID_VERSION=${DRUID_VERSION} -f ./Containerfile --target druid-nano .
 ```
 
-Required hardware
-------------------
+## Configuration
+The `conf` folder must stay the same as the upstream one that can be found here:
+- https://github.com/apache/druid/tree/26.0.1/examples/conf
 
-Nano
-*********
+Run this script when updating the druid version:
+```bash
+./scripts/download_upstream_conf.sh
+```
 
-* 1 CPU
-* 4GB RAM
-* Launch command: `bin/start-nano-quickstart`
-* Configuration directory: `conf/druid/single-server/nano-quickstart`
-
-
-Micro
-*********
-
-* 4 CPU
-* 16GB RAM
-* Launch command: `bin/start-micro-quickstart`
-* Configuration directory: `conf/druid/single-server/micro-quickstart`
+## Required hardware
+- https://github.com/apache/druid/blob/26.0.1/docs/operations/single-server.md

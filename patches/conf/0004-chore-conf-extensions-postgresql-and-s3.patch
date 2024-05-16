@@ -1,0 +1,25 @@
+From f6680677305e99d730c45d859bf46c6dae2f7340 Mon Sep 17 00:00:00 2001
+From: maxime1907 <19607336+maxime1907@users.noreply.github.com>
+Date: Fri, 17 May 2024 14:00:32 +0200
+Subject: [PATCH] chore(conf): extensions: postgresql and s3
+
+---
+ conf/druid/auto/_common/common.runtime.properties | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/conf/druid/auto/_common/common.runtime.properties b/conf/druid/auto/_common/common.runtime.properties
+index f980465..a841ff7 100644
+--- a/conf/druid/auto/_common/common.runtime.properties
++++ b/conf/druid/auto/_common/common.runtime.properties
+@@ -24,7 +24,7 @@
+ # If you specify `druid.extensions.loadList=[]`, Druid won't load any extension from file system.
+ # If you don't specify `druid.extensions.loadList`, Druid will load all the extensions under root extension directory.
+ # More info: https://druid.apache.org/docs/latest/operations/including-extensions.html
+-druid.extensions.loadList=["druid-hdfs-storage", "druid-kafka-indexing-service", "druid-datasketches", "druid-multi-stage-query"]
++druid.extensions.loadList=["druid-hdfs-storage", "druid-kafka-indexing-service", "druid-datasketches", "druid-multi-stage-query", "postgresql-metadata-storage", "druid-s3-extensions"]
+ 
+ # If you have a different version of Hadoop, place your Hadoop client jar files in your hadoop-dependencies directory
+ # and uncomment the line below to point to your directory.
+-- 
+2.34.1
+
