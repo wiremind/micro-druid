@@ -4,7 +4,7 @@ ARG DRUID_VERSION=26.0.0
 ENV DRUID_VERSION=$DRUID_VERSION
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends bash=5.1-2+deb11u1 perl=5.32.1-4+deb11u2 \
+    && apt-get install -y --no-install-recommends bash=5.1* perl=5.32* \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget --progress=dot:giga http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUID_VERSION}-bin.tar.gz \
