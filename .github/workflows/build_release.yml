@@ -24,6 +24,8 @@ jobs:
         os:
           - ubuntu-22.04
         context:
+          - target: druid-auto
+            suffix: -auto
           - target: druid-micro
             suffix: -micro
           - target: druid-nano

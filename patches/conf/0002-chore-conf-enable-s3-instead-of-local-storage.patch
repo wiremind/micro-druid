@@ -1,0 +1,125 @@
+From c244c1121da46cdefc38485056a9fedc0d4239b3 Mon Sep 17 00:00:00 2001
+From: maxime1907 <19607336+maxime1907@users.noreply.github.com>
+Date: Fri, 17 May 2024 12:24:07 +0200
+Subject: [PATCH] chore(conf): enable s3 instead of local storage
+
+---
+ .../_common/common.runtime.properties         | 27 ++++++++++---------
+ .../_common/common.runtime.properties         | 27 ++++++++++---------
+ 2 files changed, 30 insertions(+), 24 deletions(-)
+
+diff --git a/conf/druid/single-server/micro-quickstart/_common/common.runtime.properties b/conf/druid/single-server/micro-quickstart/_common/common.runtime.properties
+index c00be36..a841ff7 100644
+--- a/conf/druid/single-server/micro-quickstart/_common/common.runtime.properties
++++ b/conf/druid/single-server/micro-quickstart/_common/common.runtime.properties
+@@ -77,36 +77,39 @@ druid.metadata.storage.connector.port=1527
+ #
+ 
+ # For local disk (only viable in a cluster if this is a network mount):
+-druid.storage.type=local
+-druid.storage.storageDirectory=var/druid/segments
++# druid.storage.type=local
++# druid.storage.storageDirectory=var/druid/segments
+ 
+ # For HDFS:
+ #druid.storage.type=hdfs
+ #druid.storage.storageDirectory=/druid/segments
+ 
+ # For S3:
+-#druid.storage.type=s3
+-#druid.storage.bucket=your-bucket
+-#druid.storage.baseKey=druid/segments
+-#druid.s3.accessKey=...
+-#druid.s3.secretKey=...
++druid.storage.type=s3
++druid.storage.bucket=storage-bucket
++druid.storage.baseKey=druid/segments
++druid.s3.accessKey=access_key
++druid.s3.secretKey=secret_key
++
++druid.s3.endpoint.url=http://localhost:9000
++druid.s3.enablePathStyleAccess=true
+ 
+ #
+ # Indexing service logs
+ #
+ 
+ # For local disk (only viable in a cluster if this is a network mount):
+-druid.indexer.logs.type=file
+-druid.indexer.logs.directory=var/druid/indexing-logs
++# druid.indexer.logs.type=file
++# druid.indexer.logs.directory=var/druid/indexing-logs
+ 
+ # For HDFS:
+ #druid.indexer.logs.type=hdfs
+ #druid.indexer.logs.directory=/druid/indexing-logs
+ 
+ # For S3:
+-#druid.indexer.logs.type=s3
+-#druid.indexer.logs.s3Bucket=your-bucket
+-#druid.indexer.logs.s3Prefix=druid/indexing-logs
++druid.indexer.logs.type=s3
++druid.indexer.logs.s3Bucket=logs-bucket
++druid.indexer.logs.s3Prefix=druid/indexing-logs
+ 
+ #
+ # Service discovery
+diff --git a/conf/druid/single-server/nano-quickstart/_common/common.runtime.properties b/conf/druid/single-server/nano-quickstart/_common/common.runtime.properties
+index c00be36..a841ff7 100644
+--- a/conf/druid/single-server/nano-quickstart/_common/common.runtime.properties
++++ b/conf/druid/single-server/nano-quickstart/_common/common.runtime.properties
+@@ -77,36 +77,39 @@ druid.metadata.storage.connector.port=1527
+ #
+ 
+ # For local disk (only viable in a cluster if this is a network mount):
+-druid.storage.type=local
+-druid.storage.storageDirectory=var/druid/segments
++# druid.storage.type=local
++# druid.storage.storageDirectory=var/druid/segments
+ 
+ # For HDFS:
+ #druid.storage.type=hdfs
+ #druid.storage.storageDirectory=/druid/segments
+ 
+ # For S3:
+-#druid.storage.type=s3
+-#druid.storage.bucket=your-bucket
+-#druid.storage.baseKey=druid/segments
+-#druid.s3.accessKey=...
+-#druid.s3.secretKey=...
++druid.storage.type=s3
++druid.storage.bucket=storage-bucket
++druid.storage.baseKey=druid/segments
++druid.s3.accessKey=access_key
++druid.s3.secretKey=secret_key
++
++druid.s3.endpoint.url=http://localhost:9000
++druid.s3.enablePathStyleAccess=true
+ 
+ #
+ # Indexing service logs
+ #
+ 
+ # For local disk (only viable in a cluster if this is a network mount):
+-druid.indexer.logs.type=file
+-druid.indexer.logs.directory=var/druid/indexing-logs
++# druid.indexer.logs.type=file
++# druid.indexer.logs.directory=var/druid/indexing-logs
+ 
+ # For HDFS:
+ #druid.indexer.logs.type=hdfs
+ #druid.indexer.logs.directory=/druid/indexing-logs
+ 
+ # For S3:
+-#druid.indexer.logs.type=s3
+-#druid.indexer.logs.s3Bucket=your-bucket
+-#druid.indexer.logs.s3Prefix=druid/indexing-logs
++druid.indexer.logs.type=s3
++druid.indexer.logs.s3Bucket=logs-bucket
++druid.indexer.logs.s3Prefix=druid/indexing-logs
+ 
+ #
+ # Service discovery
+-- 
+2.34.1
+
