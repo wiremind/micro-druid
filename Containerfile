@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11 AS builder
+FROM eclipse-temurin:11@sha256:f9af81bc9f96546a315c135c69af1d6c8b33f2ca727d87286d8e758ca647ec2a AS builder
 
 ARG DRUID_VERSION=26.0.0
 ENV DRUID_VERSION=$DRUID_VERSION
@@ -18,11 +18,11 @@ RUN mv /apache-druid-${DRUID_VERSION} /app
 
 WORKDIR /app
 
-FROM builder as druid-micro
+FROM builder AS druid-micro
 
 ENTRYPOINT ["/app/bin/start-micro-quickstart"]
 
-FROM builder as druid-nano
+FROM builder AS druid-nano
 
 ENTRYPOINT ["/app/bin/start-nano-quickstart"]
 
