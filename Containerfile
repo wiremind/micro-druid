@@ -8,7 +8,7 @@ RUN apt-get update \
     libfindbin-libs-perl=2* \
     && rm -rf /var/lib/apt/lists/*
 
-RUN wget --progress=dot:giga http://apache.crihan.fr/dist/druid/${DRUID_VERSION}/apache-druid-${DRUID_VERSION}-bin.tar.gz \
+RUN wget --progress=dot:giga https://archive.apache.org/dist/druid/${DRUID_VERSION}/apache-druid-${DRUID_VERSION}-bin.tar.gz \
     && tar -xzf apache-druid-${DRUID_VERSION}-bin.tar.gz \
     && rm apache-druid-${DRUID_VERSION}-bin.tar.gz
 
